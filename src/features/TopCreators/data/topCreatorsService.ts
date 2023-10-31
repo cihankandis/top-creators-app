@@ -6,6 +6,11 @@ import {
   getProductCount,
 } from "./utils/dataUtils";
 
+/**
+ * Returns the top N active creators from the API endpoint.
+ * @param numberOfCreators - The number of top active creators to be fetched.
+ * @returns An Observable containing data of the top N active creators.
+ */
 export const getTopNActiveCreators = (
   numberOfCreators: number = 3
 ): Promise<TopCreator[]> => {

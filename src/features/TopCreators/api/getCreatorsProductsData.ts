@@ -11,6 +11,10 @@ export type CreatorsProductsData = {
   Products: Product[];
 };
 
+/**
+ * Fetches data containing user and product details from the API endpoint
+ * @returns An Observable containing user and product data
+ */
 export const getCreatorsProductsData =
   async (): Promise<CreatorsProductsData> => {
     try {

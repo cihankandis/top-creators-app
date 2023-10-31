@@ -1,5 +1,11 @@
 import Product from "../../types/Product";
 
+/**
+ * Returns the count of products for a specific creator
+ * @param products - The array of products to be searched
+ * @param creatorId - The ID of the creator
+ * @returns The count of products for the given creator
+ */
 export const getProductCount = (
   products: Product[],
   creatorId: string
@@ -7,6 +13,12 @@ export const getProductCount = (
   return products.filter((product) => product.creatorId === creatorId).length;
 };
 
+/**
+ * Returns the most recent product of specific creator
+ * @param products - The array of products to be searched
+ * @param creatorId - The ID of the creator
+ * @returns The most recent product created by the given creator ID or null if no product found
+ */
 export const getMostRecentProduct = (
   products: Product[],
   creatorId: string
@@ -24,6 +36,12 @@ export const getMostRecentProduct = (
   );
 };
 
+/**
+ * Compares two creators based on their product count and most recent product
+ * @param a - The first creator object to be compared
+ * @param b - The second creator object to be compared
+ * @returns 1 if 'b' should be ranked higher, -1 if 'a' should be ranked higher, 0 if they're equivalent
+ */
 export const compareCreators = (
   a: { productCount: number; mostRecentProduct: Product | null },
   b: { productCount: number; mostRecentProduct: Product | null }
