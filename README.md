@@ -1,46 +1,101 @@
-# Getting Started with Create React App
+# Top Creators Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+The "Top Creators Application" is a project built using React. The primary goal is to show top creators using the following conditions:
 
-In the project directory, you can run:
+- Creators should be sorted descending by the number of the products they created.
+- If creators have the same number of products, preference should be given to the creator of the most recent product.
 
-### `npm start`
+### External Libraries
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Material UI:**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  - Provides consistent and visually appealing UI components.
+  - components are designed with accessibility in mind.
+  - components are optimized for performance.
+  - components are tested across different browsers.
 
-### `npm test`
+- **Axios:**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  - allows to intercept requests or responses, enabling centralized handling of errors, authentication, logging.
+  - error handling capabilities for API requests
 
-### `npm run build`
+- **React-error-boundary**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  - to catch errors and display fallback error messages
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **EsLint:**
+  - identify syntax errors, common mistakes
+  - enforces consistent code style
+  - identify potential sources of bugs
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Project Structure
 
-### `npm run eject`
+## App Module
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+App module is the root module in the project and it is the starting point.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Module Description
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+App module will bootstrap the application.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **app-routing.module:** contains the config for the routing. (lazy loading)
+- **error.interceptor:** is the interceptor for the HTTP request errors. it is configured in the app.module.ts
 
-## Learn More
+## Top Creators Feature Module
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The **Top Creators** feature module is designed to be loaded lazily for better performance. (Since there is only one feature in this project, it may not be necessary to use lazy loading. However, if there will be more features and then it's a good practice to have them loaded lazily)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Module Description
+
+The **top-creators** module encapsulates all components necessary to display a list of top creators. Key components within this module:
+
+- **top-creators.component:** Responsible for fetching data utilizing a service.
+- **creator-list.component:** Displays the list of creators.
+- **creators-api.service:** Provides functions to fetch data from the server.
+- **creators-data.service:** Offers functions to retrieve data in the expected format.
+- **data-utils:** Contains helper functions used for data filtering and sorting purposes.
+
+## Setup
+
+To set up the project locally, follow these steps:
+
+1. **Clone the Repository:**
+
+   ```bash
+   cd creator-products-app
+   ```
+
+2. **Install Dependencies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Environment Configuration:**
+   - Update the environment variables in the `environment.ts` or `environment.development.ts` to use different dataUrl.
+
+## Running the Application
+
+To start the application, execute the following command:
+
+```bash
+ng serve
+```
+
+## Running the tests
+
+```bash
+npm run test
+```
+
+# Extra notes:
+
+- If the dataset is expected to be large, it might be beneficial to move the data filtering and sorting operations to the backend. Performing heavy operations on the client side is not advisable.
+
+- If these operations must be executed on the client side, using web workers might be a better approach since they run on a separate thread and do not block the UI.
+
+- I've implemented a top-creators feature module to consolidate all components and services related to top creators in one place. Considering potential future features, I've configured the project for lazy loading.
+
+- ChangeDetectionStrategy.OnPush is employed for the components. This way, Angular's change detection mechanism will only perform checks if the input reference changes or if any asynchronous operation within the component is completed.
