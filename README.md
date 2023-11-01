@@ -32,30 +32,17 @@ The "Top Creators Application" is a project built using React. The primary goal 
 
 # Project Structure
 
-## App Module
-
-App module is the root module in the project and it is the starting point.
-
-### Module Description
-
-App module will bootstrap the application.
-
-- **app-routing.module:** contains the config for the routing. (lazy loading)
-- **error.interceptor:** is the interceptor for the HTTP request errors. it is configured in the app.module.ts
-
-## Top Creators Feature Module
-
-The **Top Creators** feature module is designed to be loaded lazily for better performance. (Since there is only one feature in this project, it may not be necessary to use lazy loading. However, if there will be more features and then it's a good practice to have them loaded lazily)
-
-### Module Description
-
-The **top-creators** module encapsulates all components necessary to display a list of top creators. Key components within this module:
-
-- **top-creators.component:** Responsible for fetching data utilizing a service.
-- **creator-list.component:** Displays the list of creators.
-- **creators-api.service:** Provides functions to fetch data from the server.
-- **creators-data.service:** Offers functions to retrieve data in the expected format.
-- **data-utils:** Contains helper functions used for data filtering and sorting purposes.
+- `/src`: Main source code directory.
+  - `/common`: Contains shared components like ErrorFallback
+  - `/features`: Contains feature-specific components and logic.
+  - `/TopCreators`: Manages components related to top creators.
+    - `/api`: Handles API request to fetch creator and products data
+    - `/components`: Components for displaying top creators.
+    - `/data`: Handles data requests and data manipulation for top creators.
+    - `/utils`: Houses utility functions, helper methods, and shared code.
+    - `/types`: contains type definitions for top creator entities.
+  - `/styles`: Stores CSS, SCSS, or other style-related files.
+  - `/interceptors`: interceptors for API requests
 
 ## Setup
 
@@ -64,7 +51,7 @@ To set up the project locally, follow these steps:
 1. **Clone the Repository:**
 
    ```bash
-   cd creator-products-app
+   cd top-creators-app
    ```
 
 2. **Install Dependencies:**
@@ -74,14 +61,14 @@ To set up the project locally, follow these steps:
    ```
 
 3. **Environment Configuration:**
-   - Update the environment variables in the `environment.ts` or `environment.development.ts` to use different dataUrl.
+   - Update the environment variables in `.env` file (if necessary).
 
 ## Running the Application
 
 To start the application, execute the following command:
 
 ```bash
-ng serve
+npm run start
 ```
 
 ## Running the tests
@@ -95,7 +82,3 @@ npm run test
 - If the dataset is expected to be large, it might be beneficial to move the data filtering and sorting operations to the backend. Performing heavy operations on the client side is not advisable.
 
 - If these operations must be executed on the client side, using web workers might be a better approach since they run on a separate thread and do not block the UI.
-
-- I've implemented a top-creators feature module to consolidate all components and services related to top creators in one place. Considering potential future features, I've configured the project for lazy loading.
-
-- ChangeDetectionStrategy.OnPush is employed for the components. This way, Angular's change detection mechanism will only perform checks if the input reference changes or if any asynchronous operation within the component is completed.
