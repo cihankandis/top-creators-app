@@ -60,6 +60,5 @@ export const compareCreators = (
   } else if (a.mostRecentProduct && !b.mostRecentProduct) {
     return -1;
   }
-
   return 0;
 };

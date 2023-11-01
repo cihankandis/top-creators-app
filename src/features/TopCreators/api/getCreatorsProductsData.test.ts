@@ -4,6 +4,7 @@ import {
   getCreatorsProductsData,
   CreatorsProductsData,
 } from "./getCreatorsProductsData";
+import axiosInstance from "../../../interceptors/axiosInstance";
 
 const mockData: CreatorsProductsData = {
   Creators: [
@@ -26,7 +27,7 @@ const mockData: CreatorsProductsData = {
 
 describe("getCreatorsProductsData function", () => {
   it("fetches data successfully", async () => {
-    const mock = new MockAdapter(axios);
+    const mock = new MockAdapter(axiosInstance);
     mock.onGet().reply(200, mockData);
 
     const result = await getCreatorsProductsData();

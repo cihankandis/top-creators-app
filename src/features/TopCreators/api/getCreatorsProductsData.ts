@@ -1,6 +1,6 @@
-import axios from "axios";
 import User from "../types/User";
 import Product from "../types/Product";
+import axiosInstance from "../../../interceptors/axiosInstance";
 
 const BASE_URL =
   process.env.REACT_APP_BASE_URL ||
@@ -18,7 +18,7 @@ export type CreatorsProductsData = {
 export const getCreatorsProductsData =
   async (): Promise<CreatorsProductsData> => {
     try {
-      const response = await axios.get<CreatorsProductsData>(BASE_URL);
+      const response = await axiosInstance.get<CreatorsProductsData>(BASE_URL);
       return response.data;
     } catch (error: unknown) {
       throw new Error("Failed to fetch data from the API");
